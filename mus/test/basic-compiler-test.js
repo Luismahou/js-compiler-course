@@ -3,13 +3,14 @@ var vows = require('vows'),
 
 var compiler = require('../src/compiler');
 
-vows.describe('compiler').addBatch({
+vows.describe('basic-compiler').addBatch({
   'single note': {
     topic: compiler.compile({ tag: 'note', pitch: 'c6', dur: 250 }),
 
     'compiles to': function(notes) {
       assert.equal(1, notes.length);
-      assert.deepEqual({ tag: 'note', pitch: 'c6', start: 0, dur: 250 }, notes[0]);
+      assert.deepEqual(
+        { tag: 'note', pitch: 'c6', start: 0, dur: 250 }, notes[0]);
     }
   },
   'single seq note': {
@@ -21,8 +22,10 @@ vows.describe('compiler').addBatch({
 
     'compiles to': function(notes) {
       assert.equal(2, notes.length);
-      assert.deepEqual({ tag: 'note', pitch: 'c3', start: 0, dur: 100 }, notes[0]);
-      assert.deepEqual({ tag: 'note', pitch: 'c5', start: 100, dur: 200 }, notes[1]);
+      assert.deepEqual(
+        { tag: 'note', pitch: 'c3', start: 0, dur: 100 }, notes[0]);
+      assert.deepEqual(
+        { tag: 'note', pitch: 'c5', start: 100, dur: 200 }, notes[1]);
     }
   },
   'single par note': {
@@ -34,8 +37,10 @@ vows.describe('compiler').addBatch({
 
     'compile to': function(notes) {
       assert.equal(2, notes.length);
-      assert.deepEqual({ tag: 'note', pitch: 'c3', start: 0, dur: 100 }, notes[0]);
-      assert.deepEqual({ tag: 'note', pitch: 'c5', start: 0, dur: 200 }, notes[1]);
+      assert.deepEqual(
+        { tag: 'note', pitch: 'c3', start: 0, dur: 100 }, notes[0]);
+      assert.deepEqual(
+        { tag: 'note', pitch: 'c5', start: 0, dur: 200 }, notes[1]);
     }
   },
   'seq with nested par note': {
@@ -51,9 +56,12 @@ vows.describe('compiler').addBatch({
 
     'compiles to': function(notes) {
       assert.equal(3, notes.length);
-      assert.deepEqual({ tag: 'note', pitch: 'c1', start: 0, dur: 200 }, notes[0]);
-      assert.deepEqual({ tag: 'note', pitch: 'c2', start: 0, dur: 200 }, notes[1]);
-      assert.deepEqual({ tag: 'note', pitch: 'c3', start: 200, dur: 200 }, notes[2]);
+      assert.deepEqual(
+        { tag: 'note', pitch: 'c1', start: 0, dur: 200 }, notes[0]);
+      assert.deepEqual(
+        { tag: 'note', pitch: 'c2', start: 0, dur: 200 }, notes[1]);
+      assert.deepEqual(
+        { tag: 'note', pitch: 'c3', start: 200, dur: 200 }, notes[2]);
     }
   }
 }).export(module);
